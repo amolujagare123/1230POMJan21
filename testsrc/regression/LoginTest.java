@@ -7,23 +7,28 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import pages.Login;
 
+import java.io.IOException;
+
+import static utility.ConfigReader.*;
+
 public class LoginTest {
 
 
     @Test
-    public void loginTest()
-    {
+    public void loginTest() throws IOException {
 
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        driver.get("http://ip2.scriptinglogic.net/index.php/sessions/login");
+        driver.get(getUrl());
 
         Login login = new Login(driver);
 
-        login.setTxtUser("amolujagare@gmail.com");
-        login.setTxtPassword("admin123");
+        login.setTxtUser(getUsername());
+
+        login.setTxtPassword(getPassword());
+
         login.clickLogin();
 
     }

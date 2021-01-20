@@ -1,6 +1,7 @@
 package regression;
 
 
+import Util.OpenUrl;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,17 +12,11 @@ import java.io.IOException;
 
 import static utility.ConfigReader.*;
 
-public class LoginTest {
-
+public class LoginTest extends OpenUrl
+{
 
     @Test
     public void loginTest() throws IOException {
-
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-
-        driver.get(getUrl());
 
         Login login = new Login(driver);
 

@@ -3,6 +3,9 @@ package regression.Clients;
 import Util.DoLogin;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
+
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.Menu;
@@ -20,7 +23,8 @@ public class AddClientDataProviderTest extends DoLogin {
     public void addClientTest(String name,String surname,String language,String add1,
                               String add2,String city,String state,String zip,String country,
                               String gender,String birthdate,String phone,String mobile,
-                              String fax,String email,String web,String vat,String tax)
+                              String fax,String email,String web,String vat,String tax
+    ,String expected,String xpathActual)
     {
         // 3. click on add client link from menu
         Menu menu = new Menu(driver);
@@ -46,6 +50,18 @@ public class AddClientDataProviderTest extends DoLogin {
         addClient.setClientVat(vat);
         addClient.setClientTax(tax);
         addClient.clickSave();
+
+        String actual="";
+
+        try {
+            actual = driver.findElement(By.xpath(xpathActual)).getText();
+        }
+        catch (Exception e)
+        {
+
+        }
+        Assert.assertEquals(actual,expected,"wrong dipsplay message");
+
     }
 
     @DataProvider
